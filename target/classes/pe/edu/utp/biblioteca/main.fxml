@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<VBox alignment="CENTER" prefHeight="332.0" prefWidth="459.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.utp.biblioteca.MainController">
+   <children>
+      <ToolBar prefHeight="40.0" prefWidth="200.0">
+        <items>
+          <Button fx:id="button_exit" onAction="#exitApp" mnemonicParsing="false" text="Salir" >
+             <graphic>
+                <FontIcon iconLiteral="fa-sign-out" iconSize="15"/>
+             </graphic>
+          </Button>
+        </items>
+      </ToolBar>
+      <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label maxWidth="1.7976931348623157E308" styleClass="main_label" stylesheets="@styles/main.css" text="Biblioteca UTP" />
+                  <Label styleClass="main_subtitle" stylesheets="@styles/main.css" text="Debe autenticarse para comenzar a utilizar nuestros materiales" wrapText="true" />
+
+               </children>
+               <opaqueInsets>
+                  <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+               </padding>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Button fx:id="button_login" onAction="#login" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="main_button" stylesheets="@styles/main.css" text="Iniciar Sesión" >
+                     <graphic>
+                        <FontIcon iconLiteral="fa-user"/>
+                     </graphic>
+                  </Button>
+                  <StackPane maxWidth="Infinity">
+                     <children>
+                        <Separator maxWidth="1.7976931348623157E308" prefHeight="3.0" prefWidth="202.0" />
+                        <Label layoutX="50" layoutY="11.0" style="-fx-background-color: inherit;" text="o puedes">
+                           <padding>
+                              <Insets left="8.0" right="8.0" />
+                           </padding></Label>
+                     </children>
+                     <padding>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </padding>
+                  </StackPane>
+                  <Button fx:id="button_register" onAction="#register" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="main_button" stylesheets="@styles/main.css" text="Registrarse" >
+                     <graphic>
+                        <FontIcon iconLiteral="fa-user-plus"/>
+                     </graphic>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>

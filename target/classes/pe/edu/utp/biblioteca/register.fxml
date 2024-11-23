@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.utp.biblioteca.RegisterController">
+    <children>
+        <ToolBar layoutX="-11.0" layoutY="14.0" prefHeight="40.0" prefWidth="200.0">
+            <items>
+                <Button mnemonicParsing="false" onAction="#goBack" text="Volver" >
+                    <graphic>
+                        <FontIcon iconLiteral="fa-chevron-left"/>
+                    </graphic>
+                </Button>
+            </items>
+        </ToolBar>
+        <VBox alignment="CENTER_LEFT" layoutX="89.0" layoutY="86.0" prefHeight="200.0" prefWidth="100.0" spacing="8.0" VBox.vgrow="ALWAYS">
+            <children>
+                <Label styleClass="main_label" stylesheets="@styles/main.css" text="Nuevo Usuario" />
+                <TextField fx:id="field_name" promptText="Nombres" />
+                <TextField fx:id="field_lastname" promptText="Apellidos" />
+                <TextField fx:id="field_dni" promptText="DNI" />
+                <PasswordField fx:id="field_password" promptText="Contraseña" />
+            <ComboBox fx:id="field_type" prefWidth="150.0" promptText="Tipo de Usuario" />
+                <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" onAction="#register" text="Continuar" contentDisplay="RIGHT">
+                    <graphic>
+                        <FontIcon iconLiteral="fa-paper-plane"/>
+                    </graphic>
+                </Button>
+            </children>
+            <padding>
+                <Insets bottom="16.0" left="23.0" right="32.0" top="16.0" />
+            </padding></VBox>
+    </children>
+</VBox>

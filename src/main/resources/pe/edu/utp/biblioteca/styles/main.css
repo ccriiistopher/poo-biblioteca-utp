@@ -1,0 +1,19 @@
+.main_button {
+	-fx-background-color: #FFC107;
+	-fx-padding: 8px 14px;
+	-fx-text-fill: #212121;
+	-fx-border-radius: 8px;
+	-fx-font-weight: 500;
+}
+
+.main_label {
+	-fx-font-weight: 700;
+	-fx-text-fill: #212121;
+	-fx-font-size: 24;
+}
+
+.main_subtitle {
+	-fx-font-weight: 400;
+	-fx-text-fill: #424242;
+	-fx-font-size: 20;
+}

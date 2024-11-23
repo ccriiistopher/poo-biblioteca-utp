@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.utp.biblioteca.BookInfoController">
+    <children>
+        <ToolBar prefHeight="40.0" prefWidth="200.0">
+            <items>
+                <Button mnemonicParsing="false" text="Salir">
+                    <graphic>
+                        <FontIcon iconLiteral="fa-sign-out" iconSize="15" />
+                    </graphic>
+                </Button>
+            </items>
+        </ToolBar>
+        <HBox prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+            <ImageView fx:id="image_book" fitHeight="150" fitWidth="100" />
+                <ScrollPane HBox.hgrow="ALWAYS">
+                    <VBox>
+                        <Label fx:id="label_title" styleClass="label_title" text="Título" />
+                        <HBox spacing="8">
+                            <Label styleClass="label_prefix" stylesheets="@styles/cell_book.css" text="Autor" />
+                            <Label fx:id="label_author" styleClass="label_content" text="Autor" />
+                        </HBox>
+                        <HBox spacing="8">
+                            <Label styleClass="label_prefix" stylesheets="@styles/cell_book.css" text="Género" />
+                            <Label fx:id="label_genre" styleClass="label_content" text="Género" />
+                        </HBox>
+                        <HBox spacing="8">
+                            <Label styleClass="label_prefix" text="ISBN" />
+                            <Label fx:id="label_isbn" styleClass="label_content" text="ISBN" />
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="8">
+                            <Label styleClass="label_prefix" text="Disponibilidad" />
+                            <Label fx:id="label_available" styleClass="label_prefix" text="Disponible">
+                                <graphic>
+                                    <FontIcon iconColor="green" iconLiteral="fa-check" iconSize="12" />
+                                </graphic>
+                            </Label>
+                        </HBox>
+                        <Button text="Prestar" onMouseClicked="#prestar"/>
+                        <padding>
+                            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                        </padding>
+                    </VBox>
+                </ScrollPane>
+        </HBox>
+    </children>
+</VBox>

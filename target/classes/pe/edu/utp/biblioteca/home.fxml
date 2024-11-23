@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="pe.edu.utp.biblioteca.HomeController">
+    <children>
+        <ToolBar prefHeight="40.0" prefWidth="200.0">
+            <items>
+                <Button mnemonicParsing="false" text="Salir">
+                    <graphic>
+                        <FontIcon iconLiteral="fa-sign-out" iconSize="15"/>
+                    </graphic>
+                </Button>
+            </items>
+        </ToolBar>
+        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+            <tabs>
+                <Tab text="Libros">
+                    <graphic>
+                        <FontIcon iconLiteral="fa-book"/>
+                    </graphic>
+                    <content>
+                        <VBox maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308"
+                                      maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
+                                    <children>
+                                        <Label maxWidth="1.7976931348623157E308" styleClass="main_label"
+                                               stylesheets="@styles/main.css" text="Catálogo de Libros"
+                                               HBox.hgrow="ALWAYS"/>
+                                        <Button fx:id="button_add_book" alignment="CENTER_RIGHT" mnemonicParsing="false"
+                                                text="Nuevo" onAction="#onAddNewBook">
+                                            <graphic>
+                                                <FontIcon iconLiteral="fa-plus" iconSize="15"/>
+                                            </graphic>
+                                        </Button>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                                    </padding>
+                                </HBox>
+                                <ListView fx:id="list_books" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS"/>
+                            </children>
+                            <padding>
+                                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                            </padding>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Usuarios">
+                    <graphic>
+                        <FontIcon iconLiteral="fa-users"/>
+                    </graphic>
+                    <content>
+                        <VBox maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308"
+                                      maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
+                                    <children>
+                                        <Label maxWidth="1.7976931348623157E308" styleClass="main_label"
+                                               stylesheets="@styles/main.css" text="Usuarios" HBox.hgrow="ALWAYS"/>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                                    </padding>
+                                </HBox>
+                                <ListView fx:id="list_usuarios" prefHeight="200.0" prefWidth="200.0"
+                                          VBox.vgrow="ALWAYS"/>
+                            </children>
+                            <padding>
+                                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                            </padding>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Préstamos">
+                    <graphic>
+                        <FontIcon iconLiteral="fa-bookmark"/>
+                    </graphic>
+                    <content>
+                        <VBox maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308"
+                                      maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
+                                    <children>
+                                        <Label maxWidth="1.7976931348623157E308" styleClass="main_label"
+                                               stylesheets="@styles/main.css" text="Préstamos" HBox.hgrow="ALWAYS"/>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                                    </padding>
+                                </HBox>
+                                <ListView fx:id="list_book_loan" prefHeight="200.0" prefWidth="200.0"
+                                          VBox.vgrow="ALWAYS"/>
+                            </children>
+                            <padding>
+                                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                            </padding>
+                        </VBox>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</VBox>

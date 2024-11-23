@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<DialogPane prefHeight="100.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.utp.biblioteca.BookCreateController">
+
+    <content>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <children>
+                <StackPane alignment="CENTER" onMouseClicked="#pickPicture" prefHeight="150" prefWidth="200" style="-fx-border-color: #424242; -fx-border-radius: 20;">
+                    <Label text="Click para seleccionar imagen" />
+                    <ImageView fx:id="img_picture" fitHeight="150" fitWidth="200" preserveRatio="true" />
+                </StackPane>
+
+                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="8.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <TextField fx:id="field_title" promptText="Título" />
+                  <Label fx:id="label_error_title" managed="false" text="Label" textFill="red" visible="false" />
+                        <TextField fx:id="field_author" promptText="Autor" />
+                  <Label fx:id="label_error_author" managed="false" text="Label" textFill="red" visible="false" />
+                        <TextField fx:id="field_isbn" promptText="ISBN" />
+                  <Label fx:id="label_error_isbn" managed="false" text="Label" textFill="red" visible="false" />
+                  <Label text="Seleccionar género" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="8.0">
+                     <children>
+                              <MenuButton fx:id="button_menu_genre" text="Seleccionar género">
+                                  <items>
+                                  </items>
+                              </MenuButton>
+                        <CheckBox fx:id="checkbox_custom" mnemonicParsing="false" text="Otro" />
+                              <TextField fx:id="field_genre" disable="true" promptText="Ingrese el género" />
+                     </children></HBox>
+                  <Label fx:id="label_error_genre" managed="false" text="Label" textFill="red" visible="false" />
+                    </children>
+                    <padding>
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </HBox>
+    </content>
+    <buttonTypes>
+        <ButtonType fx:id="button_add" buttonData="OK_DONE" text="Agregar" />
+        <ButtonType buttonData="CANCEL_CLOSE" text="Cancelar" />
+    </buttonTypes>
+</DialogPane>
