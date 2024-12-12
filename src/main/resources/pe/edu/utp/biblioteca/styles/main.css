@@ -17,3 +17,7 @@
 	-fx-text-fill: #424242;
 	-fx-font-size: 20;
 }
+
+.user_name_label {
+	-fx-font-weight: 700;
+}

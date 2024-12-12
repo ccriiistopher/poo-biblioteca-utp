@@ -1,6 +1,8 @@
 package pe.edu.utp.biblioteca;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,13 +13,14 @@ import pe.edu.utp.biblioteca.model.Libro;
 import pe.edu.utp.biblioteca.model.Usuario;
 
 import java.io.IOException;
+import java.util.Objects;
 
-public class App extends Application {
+public class App extends Application implements ChangeListener<Usuario> {
 
     private static Scene scene;
-    private static Scene bookInfoScene;
 
     private static  Parent currentScreen;
+    private static String currentScreenName;
     private static Parent previousScreen;
 
     public static Stage globalStage;
@@ -27,10 +30,22 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("main"), 640, 480);
         globalStage = stage;
-        UserSession.registerUser("Cristopher Edú", "Salazar Parinango","75719117","cesp0612", String.valueOf(Usuario.TipoUsuario.Alumno));
-        //scene = new Scene(loadFXML("home"), 640, 480);
+        UserSession.registerUser("Cristopher Edú", "Salazar Parinango","75719117","123456", String.valueOf(Usuario.TipoUsuario.Alumno));
+        UserSession.registerUser("Administrador", "Administrador", "87654321", "123456", String.valueOf(Usuario.TipoUsuario.Admin));
         stage.setScene(scene);
         stage.show();
+        UserSession.getUsuario().addListener(this);
+    }
+
+    @Override
+    public void changed(ObservableValue<? extends Usuario> observable, Usuario oldValue, Usuario newValue) {
+        if(newValue == null && !Objects.equals(currentScreenName, "main")) {
+            try {
+                setRoot("main");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     static void setRoot(String fxml) throws IOException {
@@ -46,6 +61,7 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         previousScreen = currentScreen;
         currentScreen = fxmlLoader.load();
+        currentScreenName = fxml;
         return currentScreen;
     }
 
@@ -56,7 +72,7 @@ public class App extends Application {
     public static void startBookInfoScreen(Libro book) throws IOException {
         if(bookInfoStage == null) {
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource( "book_info.fxml"));
-            bookInfoScene = new Scene(fxmlLoader.load(), 640, 480);
+            Scene bookInfoScene = new Scene(fxmlLoader.load(), 640, 480);
             bookInfoStage = new Stage();
             bookInfoStage.setScene(bookInfoScene);
         }

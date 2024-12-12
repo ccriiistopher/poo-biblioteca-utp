@@ -1,13 +1,11 @@
 package pe.edu.utp.biblioteca.model;
 
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
 
 public class Libro {
     private String titulo, autor, genero, isbn, picture;
-    private final BooleanProperty disponibilidad = new SimpleBooleanProperty(true);
+    private final BooleanProperty disponibilidad = new SimpleBooleanProperty();
 
     public Libro(String titulo, String autor, String genero, String isbn, String picture) {
         this.titulo = titulo;
@@ -15,6 +13,7 @@ public class Libro {
         this.genero = genero;
         this.isbn = isbn;
         this.picture = picture;
+        setDisponibilidad(true);
     }
 
     public String getTitulo() {

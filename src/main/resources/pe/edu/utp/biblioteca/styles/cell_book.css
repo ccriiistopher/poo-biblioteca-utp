@@ -20,6 +20,6 @@
 }
 
 .label_unavailable {
-    -fx-text-fill: #FFC107;
+    -fx-text-fill: #F57C00;
     -fx-font-weight: 700;
 }

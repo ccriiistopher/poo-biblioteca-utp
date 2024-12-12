@@ -1,9 +1,7 @@
 package pe.edu.utp.biblioteca;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import pe.edu.utp.biblioteca.domain.Biblioteca;
+import javafx.scene.control.*;
 import pe.edu.utp.biblioteca.domain.Libros;
 import pe.edu.utp.biblioteca.domain.UserSession;
 import pe.edu.utp.biblioteca.model.Libro;
@@ -11,6 +9,7 @@ import pe.edu.utp.biblioteca.model.Usuario;
 import pe.edu.utp.biblioteca.ui.BookCellFactory;
 import pe.edu.utp.biblioteca.ui.BookCreateDialog;
 import pe.edu.utp.biblioteca.ui.UserCellFactory;
+
 import java.util.Optional;
 
 public class HomeController {
@@ -22,9 +21,38 @@ public class HomeController {
     public ListView<Usuario> list_usuarios;
 
     @FXML
+    public Label label_username;
+
+    @FXML
+    public Label label_user_role;
+
+    @FXML
     public Button button_add_book;
 
+    @FXML
+    public Tab tab_users;
+
+    @FXML
+    public TabPane pane_main;
+
     public void initialize() {
+        Usuario currentUser = UserSession.getUsuario().get();
+        label_username.setText(currentUser.nombresProperty().get() + " " + currentUser.apellidosProperty().get());
+        switch (currentUser.getTipo()) {
+            case Admin:
+                button_add_book.setVisible(true);
+                label_user_role.setText("Administrador");
+                break;
+            case Alumno:
+                button_add_book.setVisible(false);
+                pane_main.getTabs().remove(1);
+                label_user_role.setText("Alumno");
+                break;
+            default:
+                button_add_book.setVisible(false);
+                label_user_role.setText("Usuario");
+                break;
+        }
         Libros.registrarLibro(new Libro(
                 "Cien Años de Soledad",
                 "Gabriel García Márquez",
@@ -120,11 +148,12 @@ public class HomeController {
 
     @FXML
     public void onAddNewBook() {
-        System.out.println("Adding new book");
-        BookCreateDialog bookCreateDialog = null;
-        bookCreateDialog = new BookCreateDialog(App.globalStage);
+        BookCreateDialog bookCreateDialog = new BookCreateDialog(App.globalStage);
         Optional<Libro> result = bookCreateDialog.showAndWait();
         result.ifPresent(Libros::registrarLibro);
+    }
 
+    public void logout() {
+        UserSession.signOut();
     }
 }
