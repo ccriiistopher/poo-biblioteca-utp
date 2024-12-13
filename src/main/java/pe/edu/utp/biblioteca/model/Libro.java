@@ -1,11 +1,8 @@
 package pe.edu.utp.biblioteca.model;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-
 public class Libro {
     private String titulo, autor, genero, isbn, picture;
-    private final BooleanProperty disponibilidad = new SimpleBooleanProperty();
+    private boolean disponibilidad = true;
 
     public Libro(String titulo, String autor, String genero, String isbn, String picture) {
         this.titulo = titulo;
@@ -48,13 +45,12 @@ public class Libro {
         this.isbn = isbn;
     }
 
-    public BooleanProperty disponibilidadProperty() {
+    public boolean isDisponibilidad() {
         return disponibilidad;
     }
 
     public void setDisponibilidad(boolean disponibilidad) {
-        System.out.println("cambiando disponibilidad");
-        this.disponibilidad.setValue(disponibilidad);
+        this.disponibilidad = disponibilidad;
     }
 
     public String getPicture() {

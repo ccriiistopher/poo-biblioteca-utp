@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<DialogPane prefHeight="100.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.utp.biblioteca.BookPrestamoController">
+    <content>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <children>
+                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="8.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <DatePicker fx:id="picker_retorno" promptText="Retorno estimado"/>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="8.0">
+                            <children>
+                                <MenuButton fx:id="button_menu_user" text="Seleccionar Usuario">
+                                    <items>
+                                    </items>
+                                </MenuButton>
+                            </children>
+                        </HBox>
+                        <Label fx:id="label_error_user" managed="false" text="Label" textFill="red" visible="false" />
+                    </children>
+                    <padding>
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </HBox>
+    </content>
+    <buttonTypes>
+        <ButtonType fx:id="button_ok" buttonData="OK_DONE" text="Aceptar" />
+        <ButtonType buttonData="CANCEL_CLOSE" text="Cancelar" />
+    </buttonTypes>
+</DialogPane>

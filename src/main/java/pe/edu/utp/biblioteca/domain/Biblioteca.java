@@ -2,7 +2,6 @@ package pe.edu.utp.biblioteca.domain;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import pe.edu.utp.biblioteca.model.Libro;
 import pe.edu.utp.biblioteca.model.Prestamo;
 import pe.edu.utp.biblioteca.model.Usuario;
@@ -10,7 +9,7 @@ import pe.edu.utp.biblioteca.model.Usuario;
 public class Biblioteca {
     private static ObservableList<Usuario> usuarios = FXCollections.observableArrayList();
     private static ObservableList<Libro> libros = FXCollections.observableArrayList();
-    private static ObservableMap<String, ObservableList<Prestamo>> prestamos = FXCollections.observableHashMap();
+    private static ObservableList<Prestamo> prestamos = FXCollections.observableArrayList();
 
     private Biblioteca(){}
 
@@ -22,25 +21,28 @@ public class Biblioteca {
         return libros;
     }
 
-    static ObservableMap<String, ObservableList<Prestamo>> getPrestamos() {
+    static ObservableList<Prestamo> getPrestamos() {
         return prestamos;
     }
 
     static void registrarPrestamo(Prestamo prestamo) {
-        if(prestamos.containsKey(prestamo.getUsuario().dniProperty().get())) {
-            prestamos.get(prestamo.getUsuario().dniProperty().get()).add(prestamo);
-        } else {
-            prestamos.put(prestamo.getUsuario().dniProperty().get(), FXCollections.observableArrayList(prestamo));
-        }
+        prestamos.add(prestamo);
+        Libro libro1 = libros.stream().filter(it->it.getIsbn().equals(prestamo.getLibro().getIsbn())).findFirst().orElse(null);
+        int index = libros.indexOf(libro1);
+        libros.remove(prestamo.getLibro());
+        libros.add(index, prestamo.getLibro());
+        Libros.seleccionarLibro(null);
+        Libros.seleccionarLibro(prestamo.getLibro());
     }
 
-    static void removerPrestamo(Usuario usuario, Libro libro) {
-        if(prestamos.containsKey(usuario.dniProperty().get())) {
-            Prestamo prestamo = prestamos.get(usuario.dniProperty().get()).stream().filter(
-                    it -> it.getLibro().equals(libro)
-            ).findFirst().orElse(null);
-            prestamos.get(usuario.dniProperty().get()).remove(prestamo);
-        }
+    static void removerPrestamo(Libro libro) {
+            Prestamo prestamo1 = prestamos.stream().filter(it->it.getLibro().equals(libro)).findFirst().orElse(null);
+            if(prestamo1 != null )prestamos.remove(prestamo1);
+            libro.setDisponibilidad(true);
+        libros.remove(libro);
+        Libros.seleccionarLibro(null);
+        Libros.seleccionarLibro(libro);
+
     }
 
     static void registrarLibro(Libro libro){

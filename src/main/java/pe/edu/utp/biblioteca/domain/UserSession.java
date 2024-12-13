@@ -58,7 +58,7 @@ public class UserSession {
         return null;
     }
 
-    static Usuario encontrarUsuario(String dni){
+    public static Usuario encontrarUsuario(String dni){
         Usuario resultado = null;
         for(Usuario usuario : Biblioteca.getUsuarios()){
             if(usuario.dniProperty().get().equals(dni)){

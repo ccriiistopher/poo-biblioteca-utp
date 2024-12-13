@@ -14,7 +14,7 @@ import pe.edu.utp.biblioteca.model.Libro;
 import pe.edu.utp.biblioteca.util.ImageCache;
 import java.io.IOException;
 
-public class BookCellController implements ChangeListener<Boolean> {
+public class BookCellController {
     private Libro book;
 
     @FXML
@@ -27,9 +27,7 @@ public class BookCellController implements ChangeListener<Boolean> {
     public ProgressIndicator progress;
 
     public void setLibro(Libro book) {
-        if(this.book != null) {
-            this.book.disponibilidadProperty().removeListener(this);
-        }
+
         this.book = book;
         if( book != null) {
             progress.setVisible(true);
@@ -43,8 +41,11 @@ public class BookCellController implements ChangeListener<Boolean> {
                 Task<Image> loadImageTask = getImageTask(book);
                 new Thread(loadImageTask).start();
             }
-            book.disponibilidadProperty().addListener(this);
-            changed(null, false, book.disponibilidadProperty().get());
+            boolean newValue = book.isDisponibilidad();
+            label_available.getStyleClass().add(newValue ? "label_available": "label_unavailable");
+            label_available.setText(newValue ? "Disponible" : "No disponible");
+            ((FontIcon)label_available.getGraphic()).setIconLiteral(newValue ? "fa-check" : "fa-close");
+            ((FontIcon)label_available.getGraphic()).setIconColor(Paint.valueOf(newValue ? "green" : "#F57C00"));
         }
     }
 
@@ -58,13 +59,5 @@ public class BookCellController implements ChangeListener<Boolean> {
     @FXML
     private void onCellClicked() throws IOException {
         App.startBookInfoScreen(book);
-    }
-
-    @Override
-    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-        label_available.getStyleClass().add(newValue ? "label_available": "label_unavailable");
-        label_available.setText(newValue ? "Disponible" : "No disponible");
-        ((FontIcon)label_available.getGraphic()).setIconLiteral(newValue ? "fa-check" : "fa-close");
-        ((FontIcon)label_available.getGraphic()).setIconColor(Paint.valueOf(newValue ? "green" : "#F57C00"));
     }
 }

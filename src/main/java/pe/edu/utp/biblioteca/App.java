@@ -70,16 +70,20 @@ public class App extends Application implements ChangeListener<Usuario> {
     }
 
     public static void startBookInfoScreen(Libro book) throws IOException {
+
         if(bookInfoStage == null) {
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource( "book_info.fxml"));
             Scene bookInfoScene = new Scene(fxmlLoader.load(), 640, 480);
             bookInfoStage = new Stage();
             bookInfoStage.setScene(bookInfoScene);
+            bookInfoStage.setTitle(
+                    book.getTitulo()
+            );
         }
         if(!bookInfoStage.isShowing()) {
-            bookInfoStage.show();
             bookInfoStage.toFront();
         }
+        bookInfoStage.show();
         Libros.seleccionarLibro(book);
     }
 }

@@ -2,12 +2,16 @@ package pe.edu.utp.biblioteca;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import pe.edu.utp.biblioteca.domain.Biblioteca;
 import pe.edu.utp.biblioteca.domain.Libros;
+import pe.edu.utp.biblioteca.domain.PrestamoLibro;
 import pe.edu.utp.biblioteca.domain.UserSession;
 import pe.edu.utp.biblioteca.model.Libro;
+import pe.edu.utp.biblioteca.model.Prestamo;
 import pe.edu.utp.biblioteca.model.Usuario;
 import pe.edu.utp.biblioteca.ui.BookCellFactory;
 import pe.edu.utp.biblioteca.ui.BookCreateDialog;
+import pe.edu.utp.biblioteca.ui.PrestamoCellFactory;
 import pe.edu.utp.biblioteca.ui.UserCellFactory;
 
 import java.util.Optional;
@@ -19,6 +23,9 @@ public class HomeController {
 
     @FXML
     public ListView<Usuario> list_usuarios;
+
+    @FXML
+    public ListView<Prestamo> list_book_loan;
 
     @FXML
     public Label label_username;
@@ -42,15 +49,24 @@ public class HomeController {
             case Admin:
                 button_add_book.setVisible(true);
                 label_user_role.setText("Administrador");
+                list_book_loan.setItems(
+                        PrestamoLibro.getPrestamos()
+                );
                 break;
             case Alumno:
                 button_add_book.setVisible(false);
                 pane_main.getTabs().remove(1);
                 label_user_role.setText("Alumno");
+                list_book_loan.setItems(
+                        PrestamoLibro.getUsuariosPrestamos(UserSession.getUsuario().get())
+                );
                 break;
             default:
                 button_add_book.setVisible(false);
                 label_user_role.setText("Usuario");
+                list_book_loan.setItems(
+                        PrestamoLibro.getUsuariosPrestamos(UserSession.getUsuario().get())
+                );
                 break;
         }
         Libros.registrarLibro(new Libro(
@@ -143,6 +159,10 @@ public class HomeController {
                 UserSession.getUsuarios()
         );
         list_usuarios.setFixedCellSize(100);
+
+        list_book_loan.setCellFactory(new PrestamoCellFactory());
+
+        list_book_loan.setFixedCellSize(150);
     }
 
 
