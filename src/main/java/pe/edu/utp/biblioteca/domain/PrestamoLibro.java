@@ -26,4 +26,8 @@ public class PrestamoLibro {
     public static ObservableList<Prestamo> getPrestamos() {
         return Biblioteca.getPrestamos();
     }
+
+    public static Prestamo getPrestamo(Libro libro){
+        return Biblioteca.getPrestamos().filtered(it-> it.getLibro().equals(libro)).stream().findFirst().orElse(null);
+    }
 }

@@ -7,11 +7,12 @@ import pe.edu.utp.biblioteca.model.Prestamo;
 import pe.edu.utp.biblioteca.model.Usuario;
 
 public class Biblioteca {
-    private static ObservableList<Usuario> usuarios = FXCollections.observableArrayList();
-    private static ObservableList<Libro> libros = FXCollections.observableArrayList();
-    private static ObservableList<Prestamo> prestamos = FXCollections.observableArrayList();
+    private static final ObservableList<Usuario> usuarios = FXCollections.observableArrayList();
+    private static final ObservableList<Libro> libros = FXCollections.observableArrayList();
+    private static final ObservableList<Prestamo> prestamos = FXCollections.observableArrayList();
 
-    private Biblioteca(){}
+    private Biblioteca() {
+    }
 
     static ObservableList<Usuario> getUsuarios() {
         return usuarios;
@@ -27,8 +28,7 @@ public class Biblioteca {
 
     static void registrarPrestamo(Prestamo prestamo) {
         prestamos.add(prestamo);
-        Libro libro1 = libros.stream().filter(it->it.getIsbn().equals(prestamo.getLibro().getIsbn())).findFirst().orElse(null);
-        int index = libros.indexOf(libro1);
+        int index = libros.indexOf(prestamo.getLibro());
         libros.remove(prestamo.getLibro());
         libros.add(index, prestamo.getLibro());
         Libros.seleccionarLibro(null);
@@ -36,16 +36,17 @@ public class Biblioteca {
     }
 
     static void removerPrestamo(Libro libro) {
-            Prestamo prestamo1 = prestamos.stream().filter(it->it.getLibro().equals(libro)).findFirst().orElse(null);
-            if(prestamo1 != null )prestamos.remove(prestamo1);
-            libro.setDisponibilidad(true);
-        libros.remove(libro);
+        prestamos.stream().filter(it -> it.getLibro().equals(libro)).findFirst().ifPresent(prestamos::remove);
+        libro.setDisponibilidad(true);
+        int index = libros.indexOf(libro);
+        libros.remove(index);
+        libros.add(index, libro);
         Libros.seleccionarLibro(null);
         Libros.seleccionarLibro(libro);
 
     }
 
-    static void registrarLibro(Libro libro){
+    static void registrarLibro(Libro libro) {
         libros.add(libro);
     }
 
@@ -53,7 +54,7 @@ public class Biblioteca {
         libros.remove(libro);
     }
 
-    static void registrarUsuario(Usuario usuario){
+    static void registrarUsuario(Usuario usuario) {
         usuarios.add(usuario);
     }
 

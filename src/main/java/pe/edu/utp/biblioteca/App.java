@@ -69,21 +69,32 @@ public class App extends Application implements ChangeListener<Usuario> {
         launch();
     }
 
+    static BookInfoController bookInfoController;
     public static void startBookInfoScreen(Libro book) throws IOException {
-
-        if(bookInfoStage == null) {
-            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource( "book_info.fxml"));
-            Scene bookInfoScene = new Scene(fxmlLoader.load(), 640, 480);
-            bookInfoStage = new Stage();
-            bookInfoStage.setScene(bookInfoScene);
-            bookInfoStage.setTitle(
-                    book.getTitulo()
-            );
+        Libros.seleccionarLibro(null);
+        if(bookInfoController != null) {
+            closeBookInfoScreen();
         }
-        if(!bookInfoStage.isShowing()) {
-            bookInfoStage.toFront();
-        }
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource( "book_info.fxml"));
+        Scene bookInfoScene = new Scene(fxmlLoader.load(), 640, 480);
+        bookInfoStage = new Stage();
+        bookInfoStage.setScene(bookInfoScene);
+        bookInfoStage.setTitle(
+                book.getTitulo()
+        );
+        bookInfoController = fxmlLoader.getController();
+        bookInfoStage.setOnCloseRequest(event -> {
+            Libros.getLibro().removeListener(bookInfoController);
+        });
         bookInfoStage.show();
         Libros.seleccionarLibro(book);
+    }
+
+    public static void closeBookInfoScreen() {
+        if(bookInfoStage != null) {
+            bookInfoStage.close();
+            bookInfoStage = null;
+        }
+        Libros.getLibro().removeListener(bookInfoController);
     }
 }

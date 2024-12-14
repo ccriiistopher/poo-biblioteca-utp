@@ -10,9 +10,9 @@
     <children>
         <ToolBar prefHeight="40.0" prefWidth="200.0">
             <items>
-                <Button mnemonicParsing="false" text="Salir">
+                <Button mnemonicParsing="false" text="Salir" onMouseClicked="#close">
                     <graphic>
-                        <FontIcon iconLiteral="fa-sign-out" iconSize="15" />
+                        <FontIcon iconLiteral="fa-sign-out" iconSize="15" text="" />
                     </graphic>
                 </Button>
             </items>
@@ -42,7 +42,12 @@
                                 </graphic>
                             </Label>
                         </HBox>
-                        <Button text="Prestar" onMouseClicked="#prestar" fx:id="button_prestar"/>
+                        <HBox fx:id="box_prestamo" alignment="CENTER_LEFT" spacing="8">
+                            <Label styleClass="label_prefix" text="Prestado a" />
+                            <Label fx:id="label_user" styleClass="label_prefix" text="Usuario">
+                            </Label>
+                        </HBox>
+                        <Button fx:id="button_prestar" onMouseClicked="#prestar" text="Prestar" />
                         <padding>
                             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                         </padding>

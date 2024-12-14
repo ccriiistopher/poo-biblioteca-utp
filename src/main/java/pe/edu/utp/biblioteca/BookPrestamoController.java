@@ -38,7 +38,7 @@ public class BookPrestamoController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        UserSession.getUsuarios().forEach(
+        UserSession.getUsuarios().stream().filter(it->it.getTipo() != Usuario.TipoUsuario.Admin).forEach(
                 it -> {
                     MenuItem userItem = new MenuItem();
                     userItem.setId(it.dniProperty().get());
@@ -82,10 +82,12 @@ public class BookPrestamoController implements Initializable {
         }
         if(date_retorno == null) {
             label_error_user.setText("La fecha de retorno no puede estar vacia");
+        } else {
+            if (!date_retorno.isAfter(LocalDate.now())) {
+                label_error_user.setText("La fecha de retorno debe ser una fecha futura");
+            }
         }
-        if (date_retorno.isBefore(LocalDate.now())) {
-            label_error_user.setText("La fecha de retorno debe ser una fecha futura");
-        }
+
         label_error_user.setVisible(!valid);
         label_error_user.setManaged(!valid);
     }

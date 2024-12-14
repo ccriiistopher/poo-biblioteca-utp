@@ -174,6 +174,7 @@ public class HomeController {
     }
 
     public void logout() {
+        App.closeBookInfoScreen();
         UserSession.signOut();
     }
 }
